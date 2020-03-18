@@ -15,15 +15,15 @@ import os
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--dataset", required=True,
-	help="path to input directory of faces + images")
+	help="Caminho para o diretório de faces + imagens")
 ap.add_argument("-e", "--encodings", required=True,
-	help="path to serialized db of facial encodings")
+	help="Caminho para o BD serializado de encodings faciais")
 ap.add_argument("-d", "--detection-method", type=str, default="cnn",
-	help="face detection model to use: either `hog` or `cnn`")
+	help="Modelo de detecçäo facial a ser utilizado: `hog` ou `cnn`")
 args = vars(ap.parse_args())
 
 # grab the paths to the input images in our dataset
-print("[INFO] quantifying faces...")
+print("[INFO] Contabilizando faces...")
 imagePaths = list(paths.list_images(args["dataset"]))
 
 # initialize the list of known encodings and known names
@@ -33,7 +33,7 @@ knownNames = []
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
 	# extract the person name from the image path
-	print("[INFO] processing image {}/{}".format(i + 1,
+	print("[INFO] Processando imagem {}/{}".format(i + 1,
 		len(imagePaths)))
 	name = imagePath.split(os.path.sep)[-2]
 
@@ -58,7 +58,7 @@ for (i, imagePath) in enumerate(imagePaths):
 		knownNames.append(name)
 
 # dump the facial encodings + names to disk
-print("[INFO] serializing encodings...")
+print("[INFO] Serializando encodings...")
 data = {"encodings": knownEncodings, "names": knownNames}
 f = open(args["encodings"], "wb")
 f.write(pickle.dumps(data))

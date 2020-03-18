@@ -14,19 +14,19 @@ import cv2
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--cascade", required=True,
-	help = "path to where the face cascade resides")
+	help = "Caminho para o cascade de faces")
 ap.add_argument("-e", "--encodings", required=True,
-	help="path to serialized db of facial encodings")
+	help="Caminho para o BD serializado de encodings faciais")
 args = vars(ap.parse_args())
 
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
-print("[INFO] loading encodings + face detector...")
+print("[INFO] Carregando encodings + detector facial...")
 data = pickle.loads(open(args["encodings"], "rb").read())
 detector = cv2.CascadeClassifier(args["cascade"])
 
 # initialize the video stream and allow the camera sensor to warm up
-print("[INFO] starting video stream...")
+print("[INFO] Iniciando a transmissäo de vídeo...")
 vs = VideoStream(src=0).start()
 # vs = VideoStream(usePiCamera=True).start()
 time.sleep(2.0)
@@ -112,8 +112,8 @@ while True:
 
 # stop the timer and display FPS information
 fps.stop()
-print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
-print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
+print("[INFO] Tempo gasto: {:.2f}".format(fps.elapsed()))
+print("[INFO] FPS aproximado: {:.2f}".format(fps.fps()))
 
 # do a bit of cleanup
 cv2.destroyAllWindows()
